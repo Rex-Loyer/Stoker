@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image,} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image, ImageBackground} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -55,7 +55,7 @@ function AddText({navigation}) {
 
 function PickPicture({navigation}) {
   const [items, setItems] = React.useState([
-    { name: 'TURQUOISE', code: '#1abc9c' },
+    { name: 'https://picsum.photos/id/1040/200/200.jpg', code: '#1abc9c' },
     { name: 'EMERALD', code: '#2ecc71' },
     { name: 'PETER RIVER', code: '#3498db' },
     { name: 'AMETHYST', code: '#9b59b6' },
@@ -86,11 +86,11 @@ function PickPicture({navigation}) {
       // fixed
       spacing={10}
       renderItem={({ item }) => (
-          <View onStartShouldSetResponder={() => navigation.navigate('Pick Music')}>
+          <View onStartShouldSetResponder={() => {navigation.navigate('Pick Music', {backgroundPicURL: items.name}) }}>
           <Image
             style={[styles.itemContainer]}
             resizeMode='cover'
-            source={{uri: 'https://picsum.photos/id/1040/200/200.jpg'}}
+            source={{uri: `${item.name}`}}
           />
 
         </View>
@@ -99,7 +99,9 @@ function PickPicture({navigation}) {
   );
 }
 
-function PickMusic({navigation}) {
+function PickMusic({route, navigation}) {
+  const {backgroundPicURL} = route.params;
+
   const [items, setItems] = React.useState([
     { name: 'TURQUOISE', code: '#1abc9c' },
     { name: 'EMERALD', code: '#2ecc71' },
@@ -132,17 +134,23 @@ function PickMusic({navigation}) {
       // fixed
       spacing={10}
       renderItem={({ item }) => (
-        <View onStartShouldSetResponder={() => navigation.navigate('Final Result')} style={[styles.itemContainer, { backgroundColor: item.code }]}>
+        <View
+          onStartShouldSetResponder={() => navigation.navigate('Final Result', {backgroundPic: backgroundPicURL})}
+          style={[styles.itemContainer]}
+        >
           <Text style={styles.itemName}>{item.name}</Text>
+
         </View>
       )}
     />
   );
 }
 
-function FinalResult({navigation}) {
+function FinalResult({route, navigation}) {
+  const {backgroundPic} = route.params;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <ImageBackground source={{uri: `${backgroundPic}`}}/>
       <Text>FinalResult</Text>
     </View>
   );
