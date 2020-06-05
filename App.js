@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { FlatGrid } from 'react-native-super-grid';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -12,16 +13,16 @@ function HomeScreen({navigation}) {
       <Text style={{fontSize: 80, fontWeight: 'bold', color: 'red', }}>Stoker</Text>
       <Button
         title="Get Started"
-        onPress={() => navigation.navigate('Pick Music')}
+        onPress={() => navigation.navigate('Add Text')}
       />
     </View>
   );
 }
 
-function PickMusic({navigation}) {
+function AddText({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>PickMusic</Text>
+      <Text>AddText</Text>
       <Button
         title="forward"
         onPress={() => navigation.navigate('Pick Picture')}
@@ -36,16 +37,17 @@ function PickPicture({navigation}) {
       <Text>PickPicture</Text>
       <Button
         title="forward"
-        onPress={() => navigation.navigate('Add Text')}
+        onPress={() => navigation.navigate('Pick Music')}
       />
     </View>
   );
 }
 
-function AddText({navigation}) {
+function PickMusic({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>AddText</Text>
+      <Text>PickMusic</Text>
+
       <Button
         title="forward"
         onPress={() => navigation.navigate('Final Result')}
