@@ -47,25 +47,33 @@ function Discription({navigation}) {
       <Text style={{fontSize: 20, color: 'red', }}>Stoker is an app that helps you visualize your goals to inspire action. Input your goal, pick your favorite background, and pick your music of choice. Focus using your ears and eyes. GET STOKED! </Text>
       <Button
         title="gotcha!"
-        onPress={() => navigation.navigate('Add Text')}
+        onPress={() => navigation.navigate('Set Goal')}
       />
     </View>
   );
 }
 
-function AddText({navigation}) {
+function SetGoal({navigation}) {
+
+  const [value, onChangeText] = React.useState('Your Goal Here');
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>AddText</Text>
+      <TextInput
+        style={{ height: 100, width: 300, borderColor: 'black', borderWidth: 5}}
+        onChangeText={text => onChangeText(text)}
+        value={value}
+      />
       <Button
-        title="forward"
-        onPress={() => navigation.navigate('Pick Picture')}
+        title="done"
+        onPress={() => {navigation.navigate('Pick Picture', {goal: value})}}
       />
     </View>
   );
 }
 
-function PickPicture({navigation}) {
+function PickPicture({route, navigation}) {
+  const {goal} = route.params;
   const [items, setItems] = React.useState([
     { name: 'https://picsum.photos/id/1040/800/800.jpg', code: '#1abc9c' },
     { name: 'EMERALD', code: '#2ecc71' },
@@ -98,7 +106,7 @@ function PickPicture({navigation}) {
       // fixed
       spacing={10}
       renderItem={({ item }) => (
-          <View onStartShouldSetResponder={() => {navigation.navigate('Pick Music', {backgroundPicURL: item.name}) }}>
+          <View onStartShouldSetResponder={() => {navigation.navigate('Pick Music', {backgroundPicURL: item.name, goal: goal}) }}>
           <Image
             style={[styles.itemContainer]}
             resizeMode='cover'
@@ -178,7 +186,7 @@ function App() {
         <Stack.Screen name="Discription" component={Discription} />
         <Stack.Screen name="Pick Music" component={PickMusic} />
         <Stack.Screen name="Pick Picture" component={PickPicture} />
-        <Stack.Screen name="Add Text" component={AddText} />
+        <Stack.Screen name="Set Goal" component={SetGoal} />
         <Stack.Screen name="Final Result" component={FinalResult} />
       </Stack.Navigator>
     </NavigationContainer>
