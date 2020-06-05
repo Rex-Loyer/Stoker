@@ -2,16 +2,34 @@ import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
 
 
 export default function App() {
-  const [outputText, setOutpputText] = useState('Open up App.js to start working on your app!');
   return (
     <NavigationContainer>
-      <View style={styles.container}>
-        <Text>{outputText}</Text>
-        <Button title="Change Text" onPress={() => setOutpputText('The Text Changed!')}/>
-      </View>
+      <Stack.Navigator initialRouteName="Details">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
