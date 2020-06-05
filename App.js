@@ -84,9 +84,9 @@ function PickPicture({navigation}) {
       style={styles.gridView}
       // staticDimension={300}
       // fixed
-      spacing={0}
+      spacing={10}
       renderItem={({ item }) => (
-          <View>
+          <View onStartShouldSetResponder={() => navigation.navigate('Pick Music')}>
           <Image
             style={[styles.itemContainer]}
             resizeMode='cover'
