@@ -1,6 +1,5 @@
-import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image,} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -85,11 +84,15 @@ function PickPicture({navigation}) {
       style={styles.gridView}
       // staticDimension={300}
       // fixed
-      spacing={10}
+      spacing={0}
       renderItem={({ item }) => (
-        <View style={[styles.itemContainer, { backgroundColor: item.code }]}>
-          <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemCode}>{item.code}</Text>
+          <View>
+          <Image
+            style={[styles.itemContainer]}
+            resizeMode='cover'
+            source={{uri: 'https://picsum.photos/id/1040/200/200.jpg'}}
+          />
+
         </View>
       )}
     />
@@ -100,7 +103,6 @@ function PickMusic({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>PickMusic</Text>
-
       <Button
         title="forward"
         onPress={() => navigation.navigate('Final Result')}
@@ -131,9 +133,6 @@ function App() {
     </NavigationContainer>
   );
 }
-
-//createStackNativiagtor
-//create grid, putt pictures 100%
 
 
 export default App;
