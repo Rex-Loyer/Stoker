@@ -86,13 +86,12 @@ function PickPicture({navigation}) {
       // fixed
       spacing={10}
       renderItem={({ item }) => (
-          <View onStartShouldSetResponder={() => {navigation.navigate('Pick Music', {backgroundPicURL: items.name}) }}>
+          <View onStartShouldSetResponder={() => {navigation.navigate('Pick Music', {backgroundPicURL: item.name}) }}>
           <Image
             style={[styles.itemContainer]}
             resizeMode='cover'
             source={{uri: `${item.name}`}}
           />
-
         </View>
       )}
     />
@@ -101,7 +100,6 @@ function PickPicture({navigation}) {
 
 function PickMusic({route, navigation}) {
   const {backgroundPicURL} = route.params;
-
   const [items, setItems] = React.useState([
     { name: 'TURQUOISE', code: '#1abc9c' },
     { name: 'EMERALD', code: '#2ecc71' },
@@ -135,9 +133,10 @@ function PickMusic({route, navigation}) {
       spacing={10}
       renderItem={({ item }) => (
         <View
-          onStartShouldSetResponder={() => navigation.navigate('Final Result', {backgroundPic: backgroundPicURL})}
-          style={[styles.itemContainer]}
+          onStartShouldSetResponder={() => navigation.navigate('Final Result', {"backgroundPic": backgroundPicURL})}
+          style={[styles.itemContainer, { backgroundColor: item.code }]}
         >
+          {/*console.log("return pick music:", backgroundPicURL)*/}
           <Text style={styles.itemName}>{item.name}</Text>
 
         </View>
@@ -147,7 +146,9 @@ function PickMusic({route, navigation}) {
 }
 
 function FinalResult({route, navigation}) {
+  console.log(route.params);
   const {backgroundPic} = route.params;
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <ImageBackground source={{uri: `${backgroundPic}`}}/>
