@@ -60,7 +60,7 @@ function SetGoal({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <TextInput
-        style={{ height: 100, width: 300, borderColor: 'black', borderWidth: 5}}
+        style={{ height: 100, width: 300, borderColor: 'black', borderWidth: 5, padding: 10}}
         onChangeText={text => onChangeText(text)}
         value={value}
       />
@@ -169,16 +169,20 @@ function FinalResult({route, navigation}) {
   const {goal} = route.params;
 
   return (
-    <View style={{flex: 1}}>
-      <ImageBackground
-        style={{height: 700, width: 700}}
-        source={{uri: `${backgroundPic}`}}
-      />
-      <Text style={{fontSize: 80, fontWeight: 'bold', color: 'white', padding: 10}}>{goal}</Text>
-    </View>
+    // <View style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}>
+    //   <Text style={{fontSize: 100, fontWeight: 'bold', color: 'black', }}>{goal}</Text>
+    //   <ImageBackground
+    //     style={{height: 700, width: 700, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
+    //     source={{uri: `${backgroundPic}`}}
+    //   />
+
+      <ImageBackground source={{uri: `${backgroundPic}`}} style={{width: '100%', height: '100%'}}>
+   <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center',}}>
+      <Text style= {{fontSize: 35, color: 'white'}}>{goal}</Text>
+   </View>
+</ImageBackground>
   );
 }
-
 
 function App() {
   return (
