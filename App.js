@@ -32,9 +32,21 @@ const Stack = createStackNavigator();
 function HomeScreen({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
-      <Text style={{fontSize: 80, fontWeight: 'bold', color: 'red', }}>Stoker</Text>
+      <Text style={{fontSize: 80, fontWeight: 'bold', color: 'red', padding: 10, }}>Stoker</Text>
       <Button
         title="Get Started"
+        onPress={() => navigation.navigate('Discription')}
+      />
+    </View>
+  );
+}
+
+function Discription({navigation}) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+      <Text style={{fontSize: 20, color: 'red', }}>Stoker is an app that helps you visualize your goals to inspire action. Input your goal, pick your favorite background, and pick your music of choice. Focus using your ears and eyes. GET STOKED! </Text>
+      <Button
+        title="gotcha!"
         onPress={() => navigation.navigate('Add Text')}
       />
     </View>
@@ -55,7 +67,7 @@ function AddText({navigation}) {
 
 function PickPicture({navigation}) {
   const [items, setItems] = React.useState([
-    { name: 'https://picsum.photos/id/1040/200/200.jpg', code: '#1abc9c' },
+    { name: 'https://picsum.photos/id/1040/800/800.jpg', code: '#1abc9c' },
     { name: 'EMERALD', code: '#2ecc71' },
     { name: 'PETER RIVER', code: '#3498db' },
     { name: 'AMETHYST', code: '#9b59b6' },
@@ -101,26 +113,24 @@ function PickPicture({navigation}) {
 function PickMusic({route, navigation}) {
   const {backgroundPicURL} = route.params;
   const [items, setItems] = React.useState([
-    { name: 'TURQUOISE', code: '#1abc9c' },
-    { name: 'EMERALD', code: '#2ecc71' },
-    { name: 'PETER RIVER', code: '#3498db' },
-    { name: 'AMETHYST', code: '#9b59b6' },
-    { name: 'WET ASPHALT', code: '#34495e' },
-    { name: 'GREEN SEA', code: '#16a085' },
-    { name: 'NEPHRITIS', code: '#27ae60' },
-    { name: 'BELIZE HOLE', code: '#2980b9' },
-    { name: 'WISTERIA', code: '#8e44ad' },
-    { name: 'MIDNIGHT BLUE', code: '#2c3e50' },
-    { name: 'SUN FLOWER', code: '#f1c40f' },
-    { name: 'CARROT', code: '#e67e22' },
-    { name: 'ALIZARIN', code: '#e74c3c' },
-    { name: 'CLOUDS', code: '#ecf0f1' },
-    { name: 'CONCRETE', code: '#95a5a6' },
-    { name: 'ORANGE', code: '#f39c12' },
-    { name: 'PUMPKIN', code: '#d35400' },
-    { name: 'POMEGRANATE', code: '#c0392b' },
-    { name: 'SILVER', code: '#bdc3c7' },
-    { name: 'ASBESTOS', code: '#7f8c8d' },
+    { name: 'PATRIOTIC', code: '#1abc9c' },
+    { name: 'STOCK MARKET', code: '#2ecc71' },
+    { name: 'LAUGHING KIDS', code: '#3498db' },
+    { name: 'GUTAIR', code: '#9b59b6' },
+    { name: 'CASINO', code: '#34495e' },
+    { name: 'EXCITED MURMURING', code: '#16a085' },
+    { name: 'APPLAUSE', code: '#27ae60' },
+    { name: 'WAVES', code: '#2980b9' },
+    { name: 'CITY TRAFFIC', code: '#8e44ad' },
+    { name: 'PARTY', code: '#2c3e50' },
+    { name: 'TREES RUSTLING', code: '#f1c40f' },
+    { name: 'HAPPY LAUGHTER', code: '#e67e22' },
+    { name: 'INDAIN MUSIC', code: '#e74c3c' },
+    { name: 'FRENCH MUSIC', code: '#ecf0f1' },
+    { name: 'RUSSIAN MUSIC', code: '#95a5a6' },
+    { name: 'CHINEESE MUSIC', code: '#f39c12' },
+    { name: 'CHANTING', code: '#d35400' },
+    { name: 'JUBULIANT EXCLAMATIONS', code: '#c0392b' },
   ]);
 
   return (
@@ -136,7 +146,6 @@ function PickMusic({route, navigation}) {
           onStartShouldSetResponder={() => navigation.navigate('Final Result', {"backgroundPic": backgroundPicURL})}
           style={[styles.itemContainer, { backgroundColor: item.code }]}
         >
-          {/*console.log("return pick music:", backgroundPicURL)*/}
           <Text style={styles.itemName}>{item.name}</Text>
 
         </View>
@@ -150,9 +159,12 @@ function FinalResult({route, navigation}) {
   const {backgroundPic} = route.params;
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <ImageBackground source={{uri: `${backgroundPic}`}}/>
-      <Text>FinalResult</Text>
+    <View style={{flex: 1}}>
+      <ImageBackground
+        style={{height: 700, width: 700}}
+        source={{uri: `${backgroundPic}`}}
+      />
+      <Text>Goal Text</Text>
     </View>
   );
 }
@@ -163,6 +175,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Discription" component={Discription} />
         <Stack.Screen name="Pick Music" component={PickMusic} />
         <Stack.Screen name="Pick Picture" component={PickPicture} />
         <Stack.Screen name="Add Text" component={AddText} />
