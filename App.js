@@ -120,6 +120,7 @@ function PickPicture({route, navigation}) {
 
 function PickMusic({route, navigation}) {
   const {backgroundPicURL} = route.params;
+  const {goal} = route.params;
   const [items, setItems] = React.useState([
     { name: 'PATRIOTIC', code: '#1abc9c' },
     { name: 'STOCK MARKET', code: '#2ecc71' },
@@ -151,7 +152,7 @@ function PickMusic({route, navigation}) {
       spacing={10}
       renderItem={({ item }) => (
         <View
-          onStartShouldSetResponder={() => navigation.navigate('Final Result', {"backgroundPic": backgroundPicURL})}
+          onStartShouldSetResponder={() => navigation.navigate('Final Result', {"backgroundPic": backgroundPicURL, "goal": goal})}
           style={[styles.itemContainer, { backgroundColor: item.code }]}
         >
           <Text style={styles.itemName}>{item.name}</Text>
@@ -165,6 +166,7 @@ function PickMusic({route, navigation}) {
 function FinalResult({route, navigation}) {
   console.log(route.params);
   const {backgroundPic} = route.params;
+  const {goal} = route.params;
 
   return (
     <View style={{flex: 1}}>
@@ -172,7 +174,7 @@ function FinalResult({route, navigation}) {
         style={{height: 700, width: 700}}
         source={{uri: `${backgroundPic}`}}
       />
-      <Text>Goal Text</Text>
+      <Text style={{fontSize: 80, fontWeight: 'bold', color: 'white', padding: 10}}>{goal}</Text>
     </View>
   );
 }
